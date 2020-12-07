@@ -10,7 +10,7 @@ cache:
     - "$HOME/.m2"
 env:
   global:
-    - DOCKER_IMAGE=zp8358/statisticsService:1.0.0-SNAPSHOT-$TRAVIS_JOB_NUMBER
+    - DOCKER_IMAGE=zp8358/statisticsservice:1.0.0-SNAPSHOT-$TRAVIS_JOB_NUMBER
 before_install:
   - chmod +x mvnw
 script:
