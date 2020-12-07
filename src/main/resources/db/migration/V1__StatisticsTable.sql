@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS statisticsTable;
+
+CREATE TABLE statisticsTable (
+  id BIGINT NOT NULL PRIMARY KEY,
+  userId BIGINT DEFAULT -1,
+  numOfCompleted BIGINT DEFAULT -1,
+  numOfInProgress BIGINT DEFAULT -1,
+  numOfToDo BIGINT DEFAULT -1,
+  timestampCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
