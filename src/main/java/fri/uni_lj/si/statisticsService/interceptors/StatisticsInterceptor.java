@@ -2,22 +2,22 @@ package fri.uni_lj.si.statisticsService.interceptors;
 
 import fri.uni_lj.si.statisticsService.config.RestProperties;
 import org.apache.http.HttpStatus;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Component
-public class MyInterceptor implements HandlerInterceptor {
+public class StatisticsInterceptor implements HandlerInterceptor {
 
-    private static final Logger logger = LogManager.getLogger(MyInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(StatisticsInterceptor.class);
     private static final String UNIQUE_REQUEST = "uniqueRequestId";
 
     @Autowired
