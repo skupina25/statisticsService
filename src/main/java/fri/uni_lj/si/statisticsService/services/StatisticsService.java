@@ -3,10 +3,15 @@ package fri.uni_lj.si.statisticsService.services;
 import fri.uni_lj.si.statisticsService.models.Statistic;
 import fri.uni_lj.si.statisticsService.repository.StatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +21,21 @@ public class StatisticsService {
     @Autowired
     private StatisticsRepository statisticsRepository;
 
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 100))
     public List<Statistic> getAllStatistics() {
         return statisticsRepository.findAll();
+    }
+
+    @Recover
+    public List<Statistic> getAllStatisticsRecover() {
+        List<Statistic> recoverList = new ArrayList<>();
+        Statistic recoverStatistic = new Statistic();
+        recoverStatistic.setNumOfToDo(-1L);
+        recoverStatistic.setNumOfInProgress(-1L);
+        recoverStatistic.setNumOfCompleted(-1L);
+        recoverStatistic.setUserId(-2L);
+        recoverList.add(recoverStatistic);
+        return recoverList;
     }
 
     public Statistic getStatisticById (Long id) {

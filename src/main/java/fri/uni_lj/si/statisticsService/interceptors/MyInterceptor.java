@@ -1,5 +1,8 @@
 package fri.uni_lj.si.statisticsService.interceptors;
 
+import fri.uni_lj.si.statisticsService.config.RestProperties;
+import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,6 +20,9 @@ public class MyInterceptor implements HandlerInterceptor {
     private static final Logger logger = LogManager.getLogger(MyInterceptor.class);
     private static final String UNIQUE_REQUEST = "uniqueRequestId";
 
+    @Autowired
+    private RestProperties restProperties;
+
     @Value("${spring.application.name}")
     String appName;
 
@@ -28,11 +34,16 @@ public class MyInterceptor implements HandlerInterceptor {
         UUID reqId = UUID.randomUUID();
         request.setAttribute(UNIQUE_REQUEST, reqId);
         logger.info(appName + " :: " + envType + " :: ENTRY :: " + request.getMethod() + " :: " + request.getRequestURI() + " :: " + reqId );
+
+        if (restProperties.getMaintenanceMode()) {
+            response.sendError(HttpStatus.SC_FORBIDDEN, "Maintenance mode enabled");
+        }
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         logger.info(appName + " :: " + envType + " :: EXIT :: " + request.getMethod() + " :: " + request.getRequestURI() + " :: " + request.getAttribute(UNIQUE_REQUEST));
+
     }
 }
