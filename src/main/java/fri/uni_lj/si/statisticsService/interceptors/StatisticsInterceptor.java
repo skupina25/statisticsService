@@ -44,6 +44,5 @@ public class StatisticsInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         logger.info(appName + " :: " + envType + " :: EXIT :: " + request.getMethod() + " :: " + request.getRequestURI() + " :: " + request.getAttribute(UNIQUE_REQUEST));
-
     }
 }
