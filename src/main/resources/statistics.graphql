@@ -1,0 +1,16 @@
+schema {
+    query: Query
+}
+
+type Query {
+    allStatistics: [Statistic]
+    statisticById(id: Int): Statistic
+}
+
+type Statistic {
+    id: Int!
+    userId: Int
+    numOfCompleted: Int
+    numOfToDo: Int
+    numOfInProgress: Int
+}
