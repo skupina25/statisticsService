@@ -13,12 +13,12 @@ spec:
         app: statistics-service
     spec:
       containers:
-        - image: zp8358/statisticsservice:1.0.0-SNAPSHOT-1.1
-          resources:
-            requests:
-              cpu: "30m"
-            limits:
-              cpu: "50m"
+        - image: zp8358/statisticsservice:1.0.0-SNAPSHOT-9.1
+          #resources:
+            #requests:
+              #cpu: "30m"
+            #limits:
+              #cpu: "50m"
           name: statistics-service
           env:
             - name: DBURL
