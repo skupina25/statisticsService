@@ -13,12 +13,12 @@ spec:
         app: statistics-service
     spec:
       containers:
-        - image: zp8358/statisticsservice:1.0.0-SNAPSHOT-10.1
+        - image: zp8358/statisticsservice:1.0.0-SNAPSHOT-11.1
           #resources:
             #requests:
-              #cpu: "30m"
+              #cpu: "70m"
             #limits:
-              #cpu: "50m"
+              #cpu: "80m"
           name: statistics-service
           env:
             - name: DBURL
@@ -39,13 +39,13 @@ spec:
             httpGet:
               path: /v1/statistics/checks/health/liveness
               port: server
-            initialDelaySeconds: 1800
+            initialDelaySeconds: 120
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /v1/statistics/checks/health/readiness
               port: server
-            initialDelaySeconds: 1800
+            initialDelaySeconds: 120
             periodSeconds: 3
 
 ---
