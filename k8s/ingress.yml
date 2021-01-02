@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: task-app-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /v1/files
+            backend:
+              serviceName: file-upload-service
+              servicePort: 8080
+          - path: /v1/files/*
+            backend:
+              serviceName: file-upload-service
+              servicePort: 8080
+          - path: /v1/statistics
+            backend:
+              serviceName: statistics-service
+              servicePort: 8082
+          - path: /v1/statistics/*
+            backend:
+              serviceName: statistics-service
+              servicePort: 8082
