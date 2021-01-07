@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("v1/graphql/statistics")
+@RequestMapping("v1/statistics/graphql")
 @CrossOrigin("*")
 public class GraphqlStatisticsController {
 

@@ -55,7 +55,7 @@ kind: Service
 metadata:
   name: statistics-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   ports:
     - port: 8082
       protocol: TCP
